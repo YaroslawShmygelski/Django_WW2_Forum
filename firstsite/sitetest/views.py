@@ -49,7 +49,7 @@ def show_post(request, post_slug):
         "content":post.content,
         "menu": menu,
         "gay":True,
-        "slugi":slugify(post.title)
+
     }
 
     return render(request, "sitetest/post.html", context=data)
