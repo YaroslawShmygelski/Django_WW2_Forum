@@ -4,7 +4,7 @@ from . import converts
 
 register_converter(converts.FourDigitYearConverter, "year4")
 
-urlpatterns=[
+urlpatterns = [
     path('', views.index, name="home"),
     path('about/', views.about_index, name="about"),
     path('post/<slug:post_slug>/', views.show_post, name="post"),

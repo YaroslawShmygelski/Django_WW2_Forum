@@ -26,7 +26,7 @@ data = {"title": "Mywebsite",
         }
 
 def index(request):
-    posts=Persons.objects.filter(is_published=True)
+    posts=Persons.published_queries.all()
 
     data = {"title": "Mywebsite",
             "menu": menu,
@@ -47,6 +47,7 @@ def show_post(request, post_slug):
     data={
         "title":post.title,
         "content":post.content,
+        "is_published": post.is_published,
         "menu": menu,
         "gay":True,
 
