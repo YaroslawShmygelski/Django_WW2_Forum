@@ -22,7 +22,7 @@ class Persons(models.Model):
     cat = models.ForeignKey('Category', on_delete=models.PROTECT)
 
     objects = models.Manager()
-    published_queries = PublishedManager()
+    published = PublishedManager()
 
     def save(self, *args, **kwargs):
         # Генерация slug на основе title перед сохранением
@@ -33,7 +33,7 @@ class Persons(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("post", kwargs={"post_slug": slugify(self.title)})
+        return reverse("post", kwargs={"post_slug": self.slug})
 
 class Category(models.Model):
     name = models.CharField(max_length=100, db_index=True)
@@ -41,3 +41,11 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        # Генерация slug на основе title перед сохранением
+        self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("category", kwargs={"cat_slug":self.slug} )

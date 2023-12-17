@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 
-from sitetest.models import Persons
+from sitetest.models import Persons, Category
 
 menu = [{'title': "О сайте", 'url_name': 'about'},
         {'title': "Добавить статью", 'url_name': 'add_page'},
@@ -19,6 +19,8 @@ data_db = [
     {'id': 3, 'title': 'Джулия Робертс', 'content': 'Биография Джулия Робертс', 'is_published': True},
 ]
 
+cats_db=[{"gat":1}]
+
 data = {"title": "Mywebsite",
         "menu": menu,
         "number": 220,
@@ -26,7 +28,7 @@ data = {"title": "Mywebsite",
         }
 
 def index(request):
-    posts=Persons.published_queries.all()
+    posts=Persons.published.all()
 
     data = {"title": "Mywebsite",
             "menu": menu,
@@ -41,9 +43,6 @@ def about_index(request):
 
 def show_post(request, post_slug):
     post=get_object_or_404(Persons, slug=post_slug)
-    def make_slug_links():
-        for p in post:
-            p.slug=slugify(p.title)
     data={
         "title":post.title,
         "content":post.content,
@@ -54,6 +53,23 @@ def show_post(request, post_slug):
     }
 
     return render(request, "sitetest/post.html", context=data)
+
+def show_categories(request, cat_slug):
+    category=get_object_or_404(Category, slug=cat_slug)
+    post = Persons.published.filter(cat_id=category.pk)
+    data={
+        "name":category.name,
+        "slug":category.slug,
+        "posts":post,
+        "cat_selected":category.pk,
+        "gay":True,
+
+    }
+
+    return render(request, "sitetest/index.html", context=data)
+
+
+
 
 def index2(request,id):
     return HttpResponse(f"<h1>Hello </h1><p>id: {id}</p>")

@@ -1,4 +1,5 @@
 {% load static %}
+{% load person_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,10 +32,8 @@
 <!-- LEFT side bar-->
 	<td valign="top" class="left-chapters">
 	<ul id="leftchapters">
-		<li class="selected">Все категории</li>
-		<li><a href="#">Politicians</a></li>
-		<li><a href="#">Generals</a></li>
-		<li><a href="#">Soldiers</a></li>
+		{% show_categories %}
+
 		<li class="share">
 		<p>My YT Channel</p>
 		<a class="share-yt" href="https://www.youtube.com/channel/UCnRAS_JjCz_UkiyF-bRwD_g" target="_blank" rel="nofollow"></a>
@@ -43,7 +42,6 @@
 </td>
 <!-- End of Sidebar -->
 <td valign="top" class="content">
-	<!-- Хлебные крошки -->
 	{% block breadcrumbs %}
 	{% endblock %}
 
@@ -59,7 +57,7 @@
 <!-- Footer -->
 <tr><td valign=top>
 	<div id="footer">
-		<p>&copy; 2023 Частичное или полное копирование информации с данного сайта для распространения на других ресурсах, в том числе и бумажных, строго запрещено.</p>
+		<p>&copy; 2023 Test blog site.</p>
 	</div>
 </td></tr></table>
 
