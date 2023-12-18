@@ -7,6 +7,6 @@ register = template.Library()
 
 
 @register.inclusion_tag('sitetest/list_categories.html')
-def show_categories():
+def show_categories(cat_selected=0):
     cats = Category.objects.all()
-    return {'cats': cats}
+    return {'cats': cats, 'cat_selected': cat_selected}

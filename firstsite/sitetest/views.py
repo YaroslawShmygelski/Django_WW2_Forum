@@ -33,7 +33,8 @@ def index(request):
     data = {"title": "Mywebsite",
             "menu": menu,
             "number": 220,
-            "posts": posts
+            "posts": posts,
+            "cat_selected":0
             }
     return render(request,"sitetest/index.html", context=data)
 
