@@ -1,5 +1,18 @@
 {% extends 'base.html' %}
 
+{% block breadcrumbs %}
+<!-- Теги -->
+{% for t in tags %}
+{% if tags %}
+<ul class="tags-list">
+    <li>TAGS:</li>
+    {% for t in tags %}
+    <li><a href="{{t.get_absolute_url}}">{{t.tag}}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endfor %}
+{% endblock %}
 
 {% block content %}
 
