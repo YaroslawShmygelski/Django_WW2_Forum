@@ -31,11 +31,11 @@ def about_index(request):
 
 def show_post(request, post_slug):
     post = get_object_or_404(Persons, slug=post_slug)
-    tags = TagPost.objects.all()
+    tag=post.tags.all()
     data = {
         "title": post.title,
         "content": post.content,
-        "tags":tags,
+        "tags":tag,
         "is_published": post.is_published,
         "menu": menu,
         "gay": True,

@@ -2,7 +2,6 @@
 
 {% block breadcrumbs %}
 <!-- Теги -->
-{% for t in tags %}
 {% if tags %}
 <ul class="tags-list">
     <li>TAGS:</li>
@@ -11,15 +10,13 @@
     {% endfor %}
 </ul>
 {% endif %}
-{% endfor %}
 {% endblock %}
 
 {% block content %}
 
 <h1> {{title}}</h1>
 {%if is_published%}
-gay ahah
-
+{{content}}
 {%endif%}
 <p> {{slugi|linebreaks}}</p>
 {% endblock %}
