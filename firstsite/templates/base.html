@@ -35,12 +35,12 @@
 		{% if cat_selected == 0 or cat_selected is None %}
 		<li class="selected">All Categories</li>
 		{% else %}
-		<li><a href="{% url 'home' %}">All categories</a></li>
+		<li><a href="{% url 'home' %}">All Сategories</a></li>
 		{% endif %}
 		{% show_categories cat_selected%}
 
 		<li class="share">
-		<p>My YT Channel</p>
+		<p>YouTube Chanel</p>
 		<a class="share-yt" href="https://www.youtube.com/channel/UCnRAS_JjCz_UkiyF-bRwD_g" target="_blank" rel="nofollow"></a>
 		{%show_tags%}
 		</li>

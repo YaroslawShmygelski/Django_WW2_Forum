@@ -20,13 +20,12 @@ def index(request):
 
             "number": 220,
             "posts": posts,
-            "cat_selected": 0
             }
     return render(request, "sitetest/index.html", context=data)
 
 
 def about_index(request):
-    return render(request, "sitetest/about.html", context=data)
+    return render(request, "sitetest/about.html")
 
 
 def show_post(request, post_slug):

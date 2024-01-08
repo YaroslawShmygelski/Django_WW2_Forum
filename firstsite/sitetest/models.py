@@ -19,7 +19,7 @@ class Persons(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(choices=Status.choices, default=Status.DRAFT)
-    cat = models.ForeignKey('Category', on_delete=models.PROTECT)
+    cat = models.ForeignKey('Category', on_delete=models.PROTECT,related_name='categ')
     tags = models.ManyToManyField('TagPost', blank=True, related_name='tags')
     country=models.OneToOneField('Country', blank=True, on_delete=models.SET_NULL, null=True, related_name='countri')
 
