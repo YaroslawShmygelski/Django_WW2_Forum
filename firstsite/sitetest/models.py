@@ -26,6 +26,10 @@ class Persons(models.Model):
     objects = models.Manager()
     published = PublishedManager()
 
+
+    class Meta:
+        verbose_name_plural = "Person"
+
     # Automatic Generation of a slug based on titile
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
@@ -36,6 +40,7 @@ class Persons(models.Model):
 
     def __str__(self):
         return self.title
+
 
     def get_absolute_url(self):
         return reverse("post", kwargs={"post_slug": self.slug})

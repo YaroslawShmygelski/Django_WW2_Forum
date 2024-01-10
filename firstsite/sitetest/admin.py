@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from sitetest.models import Persons
+
+admin.site.register(Persons)

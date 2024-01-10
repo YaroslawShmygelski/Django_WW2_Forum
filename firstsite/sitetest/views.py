@@ -14,7 +14,7 @@ menu = [{'title': "О сайте", 'url_name': 'about'},
 
 
 def index(request):
-    posts = Persons.published.all()
+    posts = Persons.published.all().select_related('cat')
 
     data = {"title": "Mywebsite",
 
@@ -46,7 +46,7 @@ def show_post(request, post_slug):
 
 def show_categories(request, cat_slug):
     category = get_object_or_404(Category, slug=cat_slug)
-    post = Persons.published.filter(cat_id=category.pk)
+    post = Persons.published.filter(cat_id=category.pk).select_related('cat')
     data = {
         "name": category.name,
         "slug": category.slug,
