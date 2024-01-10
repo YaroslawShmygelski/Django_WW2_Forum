@@ -12,7 +12,6 @@ menu = [{'title': "О сайте", 'url_name': 'about'},
         ]
 
 
-
 def index(request):
     posts = Persons.published.all().select_related('cat')
 
@@ -30,11 +29,11 @@ def about_index(request):
 
 def show_post(request, post_slug):
     post = get_object_or_404(Persons, slug=post_slug)
-    tag=post.tags.all()
+    tag = post.tags.all()
     data = {
         "title": post.title,
         "content": post.content,
-        "tags":tag,
+        "tags": tag,
         "is_published": post.is_published,
         "menu": menu,
         "gay": True,

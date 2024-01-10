@@ -17,13 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include("sitetest.urls")),
+    path('', include("sitetest.urls")),
     path("__debug__/", include("debug_toolbar.urls")),
 ]
 
-admin.site.site_header="Admin Panel"
+admin.site.site_header = "Admin Panel"
 
-#pass: zibert1488
+# pass: zibert1488
