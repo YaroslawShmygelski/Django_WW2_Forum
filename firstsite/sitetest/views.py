@@ -3,13 +3,13 @@ from django.shortcuts import render, get_object_or_404
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 
+from sitetest.form import CreateForm
 from sitetest.models import Persons, Category, TagPost
 
-menu = [{'title': "О сайте", 'url_name': 'about'},
-        {'title': "Добавить статью", 'url_name': 'add_page'},
-        {'title': "Обратная связь", 'url_name': 'contact'},
-        {'title': "Войти", 'url_name': 'login'}
-        ]
+menu = [{'title': "About", 'url_name': 'about'},
+        {'title': "Add Post", 'url_name': 'add_post'},
+
+]
 
 
 def index(request):
@@ -19,6 +19,7 @@ def index(request):
 
             "number": 220,
             "posts": posts,
+            "menu": menu,
             }
     return render(request, "sitetest/index.html", context=data)
 
@@ -26,6 +27,26 @@ def index(request):
 def about_index(request):
     return render(request, "sitetest/about.html")
 
+def addpost(request):
+    if request.method=="POST":
+        form=CreateForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+    else:
+        form=CreateForm()
+    data={
+        "menu": menu,
+        "title": "WEB",
+        "form": form
+    }
+    return render(request, "sitetest/addpost.html", context=data)
+
+def contact(request):
+    return HttpResponse("Обратная связь")
+
+
+def login(request):
+    return HttpResponse("Авторизация")
 
 def show_post(request, post_slug):
     post = get_object_or_404(Persons, slug=post_slug)
@@ -50,6 +71,7 @@ def show_categories(request, cat_slug):
         "name": category.name,
         "slug": category.slug,
         "posts": post,
+        "menu": menu,
         "cat_selected": category.pk,
         "gay": True,
 
@@ -65,6 +87,7 @@ def show_tags(request, tag_slug):
     data = {
         "title": tag.tag,
         "posts": posts,
+        "menu": menu,
         "cat_selected": None
 
     }

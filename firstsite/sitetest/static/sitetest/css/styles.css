@@ -78,18 +78,12 @@ ul.list-articles li {
 .header {
 	background: #3F4137;
 	height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .logo {
-	background: url('../images/logo.png') no-repeat 10px 10px;
-	width: 100px;
+	background: url('../images/logo.png') no-repeat 10px 5px;
+	width: 70px;
 	height: 60px;
-}
-.main_text {
-    display: inline-block;
 }
 
 ul.mainmenu {

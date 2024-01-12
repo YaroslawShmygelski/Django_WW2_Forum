@@ -9,5 +9,6 @@ urlpatterns = [
     path('about/', views.about_index, name="about"),
     path('post/<slug:post_slug>/', views.show_post, name="post"),
     path('category/<slug:cat_slug>/', views.show_categories, name="category"),
+    path('addpost', views.addpost, name='add_post'),
     path('tags/<slug:tag_slug>/', views.show_tags, name="tags"),
 ]

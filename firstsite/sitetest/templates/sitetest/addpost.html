@@ -1,0 +1,9 @@
+{%extends 'base.html'%}
+
+{% block content%}
+<form action="", method="Post">
+    {%csrf_token%}
+    {{form.as_p}}
+    <p> <button type="submit" > Publish </button> </p>
+</form>
+{%endblock%}
