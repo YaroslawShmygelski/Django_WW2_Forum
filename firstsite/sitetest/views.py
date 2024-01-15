@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 
@@ -31,7 +31,11 @@ def addpost(request):
     if request.method=="POST":
         form=CreateForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
+            try:
+                Persons.objects.create(**form.cleaned_data)
+                return redirect('home')
+            except:
+                form.add_error(None, "ERRRROOOOR")
     else:
         form=CreateForm()
     data={
