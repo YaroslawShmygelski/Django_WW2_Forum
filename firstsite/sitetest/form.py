@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
 
-from sitetest.models import Category, Country
+from sitetest.models import Category, Country, Persons
 
 
 @deconstructible
@@ -11,16 +11,20 @@ class Title_Validator:
     code = "english"
 
     def __init__(self, message=None):
-        self.message = message if message else "You are stupid"
+        self.message = message if message else "You wrote bad title"
 
     def __call__(self, value, *args, **kwargs):
         if not (set(value) <= set(self.ALLOWED_CHARS)):
             raise ValidationError(self.message, code=self.code)
 
 
-class CreateForm(forms.Form):
-    title = forms.CharField(max_length=255, label="Title", validators=[Title_Validator()])
-    content = forms.CharField(widget=forms.Textarea())
-    is_published = forms.BooleanField(required=False, label="Publish", initial=True)
+class CreateForm(forms.ModelForm):
     cat = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label="Another Category")
-    country = forms.ModelChoiceField(queryset=Country.objects.all(), required=False, empty_label="Not Listed")
+
+    class Meta:
+        model = Persons
+        fields = ['title','content', 'is_published', 'cat', 'tags']
+        widgets={
+            'title':forms.TextInput(attrs={'class':'form-input', 'placeholder':"name of character only capital letters"}),
+            'content': forms.Textarea(attrs={'rows':7, 'cols':50, 'placeholder':"Decribe your Character"})
+        }

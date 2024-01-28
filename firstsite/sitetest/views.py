@@ -9,7 +9,7 @@ from sitetest.models import Persons, Category, TagPost
 menu = [{'title': "About", 'url_name': 'about'},
         {'title': "Add Post", 'url_name': 'add_post'},
 
-]
+        ]
 
 
 def index(request):
@@ -27,23 +27,26 @@ def index(request):
 def about_index(request):
     return render(request, "sitetest/about.html")
 
+
 def addpost(request):
-    if request.method=="POST":
-        form=CreateForm(request.POST)
+    if request.method == "POST":
+        form = CreateForm(request.POST)
         if form.is_valid():
-            try:
-                Persons.objects.create(**form.cleaned_data)
-                return redirect('home')
-            except:
-                form.add_error(None, "ERRRROOOOR")
+        # try:
+        #         form.save()
+        #     except:
+        #         form.add_error(None, "ERRRROOOOR")
+            form.save()
+            return redirect('home')
     else:
-        form=CreateForm()
-    data={
+        form = CreateForm()
+    data = {
         "menu": menu,
         "title": "WEB",
         "form": form
     }
     return render(request, "sitetest/addpost.html", context=data)
+
 
 def contact(request):
     return HttpResponse("Обратная связь")
@@ -51,6 +54,7 @@ def contact(request):
 
 def login(request):
     return HttpResponse("Авторизация")
+
 
 def show_post(request, post_slug):
     post = get_object_or_404(Persons, slug=post_slug)
