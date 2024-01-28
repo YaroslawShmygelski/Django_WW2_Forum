@@ -26,5 +26,5 @@ class CreateForm(forms.ModelForm):
         fields = ['title','content', 'is_published', 'cat', 'tags']
         widgets={
             'title':forms.TextInput(attrs={'class':'form-input', 'placeholder':"name of character only capital letters"}),
-            'content': forms.Textarea(attrs={'rows':7, 'cols':50, 'placeholder':"Decribe your Character"})
+            'content': forms.Textarea(attrs={'rows':7, 'cols':50, 'placeholder':"Decribe your Character."})
         }
