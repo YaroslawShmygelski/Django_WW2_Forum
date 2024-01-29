@@ -3,8 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 
-from sitetest.form import CreateForm
-from sitetest.models import Persons, Category, TagPost
+from sitetest.form import CreateForm, UploadFileForm
+from sitetest.models import Persons, Category, TagPost, FileModel
 
 menu = [{'title': "About", 'url_name': 'about'},
         {'title': "Add Post", 'url_name': 'add_post'},
@@ -25,17 +25,25 @@ def index(request):
 
 
 def about_index(request):
-    return render(request, "sitetest/about.html")
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form_model = FileModel(file=form.cleaned_data['file'])
+            form_model.save()
+
+    else:
+        form = UploadFileForm()
+    return render(request, 'sitetest/about.html', {'form': form})
 
 
 def addpost(request):
     if request.method == "POST":
         form = CreateForm(request.POST)
         if form.is_valid():
-        # try:
-        #         form.save()
-        #     except:
-        #         form.add_error(None, "ERRRROOOOR")
+            # try:
+            #         form.save()
+            #     except:
+            #         form.add_error(None, "ERRRROOOOR")
             form.save()
             return redirect('home')
     else:
