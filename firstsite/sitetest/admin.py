@@ -1,18 +1,25 @@
 from django.contrib import admin, messages
+from django.utils.safestring import mark_safe
+
 from sitetest.models import Persons, Category
 
 
 @admin.register(Persons)
 class PersonsAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'time_create', 'is_published', 'brief_info']
+    fields = ['title','photo','post_photo', 'cat','content', 'tags']
+    list_display = ['id', 'title', 'time_create', 'is_published', 'post_photo']
+    readonly_fields = ['post_photo']
     list_display_links = ['id', 'title']
     list_editable = ('is_published',)
     list_per_page = 10
     actions = ['set_published', 'set_draft']
 
     @admin.display(description="Post's Text", ordering='content')
-    def brief_info(self, person: Persons):
-        return f"Text {len(person.content)} symbols."
+    def post_photo(self, person: Persons):
+        if person.photo:
+            return mark_safe(F"<img src='{person.photo.url}' width=70>")
+        else:
+            return "NO PHOTO"
 
     @admin.action(description="Publish all chosen")
     def set_published(self, request, queryset):

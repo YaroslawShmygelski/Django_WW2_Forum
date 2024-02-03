@@ -23,11 +23,13 @@ class CreateForm(forms.ModelForm):
 
     class Meta:
         model = Persons
-        fields = ['title','content','photo', 'is_published', 'cat', 'tags']
-        widgets={
-            'title':forms.TextInput(attrs={'class':'form-input', 'placeholder':"name of the "
-                                                                               "character only capital letters"}),
-            'content': forms.Textarea(attrs={'rows':7, 'cols':50, 'placeholder':"Decribe your Character."})
+        fields = ['title', 'content', 'photo', 'is_published', 'cat', 'tags']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-input', 'placeholder': "name of the "
+                                                                                  "character only capital letters"}),
+            'content': forms.Textarea(attrs={'rows': 7, 'cols': 50, 'placeholder': "Decribe your Character."})
         }
+
+
 class UploadFileForm(forms.Form):
     file = forms.ImageField(label="Файл")

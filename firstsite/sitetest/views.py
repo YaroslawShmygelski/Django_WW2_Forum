@@ -28,8 +28,8 @@ def about_index(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            form_model = FileModel(file=form.cleaned_data['file'])
-            form_model.save()
+            fp=FileModel(file=form.cleaned_data['file'])
+            fp.save()
 
     else:
         form = UploadFileForm()
@@ -37,21 +37,18 @@ def about_index(request):
 
 
 def addpost(request):
-    if request.method == "POST":
-        form = CreateForm(request.POST)
+    if request.method == 'POST':
+        form = CreateForm(request.POST, request.FILES)
         if form.is_valid():
-            # try:
-            #         form.save()
-            #     except:
-            #         form.add_error(None, "ERRRROOOOR")
             form.save()
             return redirect('home')
     else:
         form = CreateForm()
+
     data = {
-        "menu": menu,
-        "title": "WEB",
-        "form": form
+        'menu': menu,
+        'title': 'Добавление статьи',
+        'form': form
     }
     return render(request, "sitetest/addpost.html", context=data)
 
@@ -71,7 +68,7 @@ def show_post(request, post_slug):
         "title": post.title,
         "content": post.content,
         "tags": tag,
-        "is_published": post.is_published,
+        "post": post,
         "menu": menu,
         "gay": True,
 

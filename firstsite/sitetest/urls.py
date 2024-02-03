@@ -1,4 +1,7 @@
+from django.conf.urls.static import static
 from django.urls import path, register_converter
+
+from firstsite import settings
 from . import views
 from . import converts
 
@@ -12,3 +15,6 @@ urlpatterns = [
     path('addpost', views.addpost, name='add_post'),
     path('tags/<slug:tag_slug>/', views.show_tags, name="tags"),
 ]
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block breadcrumbs %}
-<!-- Теги -->
+<!-- TAGS -->
 {% if tags %}
 <ul class="tags-list">
     <li>TAGS:</li>
@@ -18,5 +18,9 @@
 {%if is_published%}
 {{content}}
 {%endif%}
-<p> {{slugi|linebreaks}}</p>
+{% if post.photo %}
+<p><img class="img-article-left" src="{{post.photo.url}}"></p>
+{% endif %}
+
+<p> {{post.content|linebreaks}}</p>
 {% endblock %}
