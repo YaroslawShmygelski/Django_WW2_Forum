@@ -14,7 +14,7 @@ class PersonsAdmin(admin.ModelAdmin):
     list_per_page = 10
     actions = ['set_published', 'set_draft']
 
-    @admin.display(description="Post's Text", ordering='content')
+    @admin.display(description="Photo", ordering='content')
     def post_photo(self, person: Persons):
         if person.photo:
             return mark_safe(F"<img src='{person.photo.url}' width=70>")

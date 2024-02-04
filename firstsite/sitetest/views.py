@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
+from django.views.generic import TemplateView
 
 from sitetest.form import CreateForm, UploadFileForm
 from sitetest.models import Persons, Category, TagPost, FileModel
@@ -12,23 +13,31 @@ menu = [{'title': "About", 'url_name': 'about'},
         ]
 
 
-def index(request):
-    posts = Persons.published.all().select_related('cat')
+# def index(request):
+#     posts = Persons.published.all().select_related('cat')
+#
+#     data = {"title": "Mywebsite",
+#
+#             "number": 220,
+#             "posts": posts,
+#             "menu": menu,
+#             }
+#     return render(request, "sitetest/index.html", context=data)
 
-    data = {"title": "Mywebsite",
 
-            "number": 220,
-            "posts": posts,
-            "menu": menu,
-            }
-    return render(request, "sitetest/index.html", context=data)
+class Persons_Main(TemplateView):
+    template_name = "sitetest/index.html"
+    extra_context = {"title": "Mywebsite",
+                     "number": 220,
+                     "posts": Persons.published.all().select_related('cat'),
+                     "menu": menu, }
 
 
 def about_index(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            fp=FileModel(file=form.cleaned_data['file'])
+            fp = FileModel(file=form.cleaned_data['file'])
             fp.save()
 
     else:
