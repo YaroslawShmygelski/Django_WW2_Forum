@@ -6,7 +6,7 @@ from sitetest.models import Persons, Category
 
 @admin.register(Persons)
 class PersonsAdmin(admin.ModelAdmin):
-    fields = ['title','photo','post_photo', 'cat','content', 'tags']
+    fields = ['title','photo','post_photo', 'cat','content', 'tags', 'is_published']
     list_display = ['id', 'title', 'time_create', 'is_published', 'post_photo']
     readonly_fields = ['post_photo']
     list_display_links = ['id', 'title']
