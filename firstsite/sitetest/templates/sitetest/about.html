@@ -4,7 +4,16 @@
 <h1>{{title}}</h1>
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <p><button type="submit">Отправить</button></p>
+    {%for item in page_object%}
+    {{item}}
+    {%endfor%}
+
+    <ul>
+        {%for p in page_object.paginator.page_range%}
+        <li>
+           <a href="?page={{p}}"> {{p}}</a>
+        </li>
+        {%endfor%}
+    </ul>
 </form>
 {% endblock %}

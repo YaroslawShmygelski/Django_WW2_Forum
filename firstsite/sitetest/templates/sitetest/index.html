@@ -1,22 +1,85 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <ul class="list-articles">
-	{% for p in posts %}
-			<li><div class="article-panel">
-	<p class="first">Category: {{p.cat.name}}</p>
-	<p class="last">Date: {{p.time_update|date:"d-m-Y H:i:s"}}</p>
-    </div>
-				<h2>{{p.title}}</h2>
-    {% autoescape off %}
-	{%if p.photo %}
-				<p><a href="{{ p.get_absolute_url }}"><img class="img-article-left thumb" src="{{p.photo.url}}"></a></p>
-	{%endif%}
-	{{p.content|linebreaks|truncatewords:40}}
-    {% endautoescape %}
-			<div class="clear"></div>
-			<p class="link-read-post"><a href="{{ p.get_absolute_url }}">Read Post</a></p>
-			</li>
-	{% endfor %}
+    {% for p in posts %}
+    <li>
+        <div class="article-panel">
+            <p class="first">Category: {{p.cat.name}}</p>
+            <p class="last">Date: {{p.time_update|date:"d-m-Y H:i:s"}}</p>
+        </div>
+        <h2>{{p.title}}</h2>
+        {% autoescape off %}
+        {%if p.photo %}
+        <p><a href="{{ p.get_absolute_url }}"><img class="img-article-left thumb" src="{{p.photo.url}}"></a></p>
+        {%endif%}
+        {{p.content|linebreaks|truncatewords:40}}
+        {% endautoescape %}
+        <div class="clear"></div>
+        <p class="link-read-post"><a href="{{ p.get_absolute_url }}">Read Post</a></p>
+    </li>
+    {% endfor %}
 </ul>
+{% endblock %}
+
+<!--Realization of pagination-->
+{% block navigation %}
+{% if page_obj.has_other_pages%}
+<nav class="list-pages">
+    <ul>
+        <!--Next page button-->
+        {%if page_obj.has_previous%}
+        <a href="?page={{page_obj.previous_page_number}}">
+            <li class="page-num ">
+                &lt;
+            </li>
+        </a>
+        {%endif%}
+
+
+        <!--To always show first page (selected and not)-->
+        {%if page_obj.number == 1 %}
+        <a href="?page={{1}}">
+            <li class="page-num page-num-selected">
+                {{ 1 }}
+            </li>
+        </a>
+        {%else%}
+        <a href="?page={{1}}">
+            <li class="page-num">
+                {{ 1 }}
+            </li>
+        </a>
+        {%endif%}
+
+        {% for p in paginator.page_range %}
+
+        {%if page_obj.number == p and p != 1 %}
+        <li class="page-num page-num-selected">
+            {{p}}
+        </li>
+        {%elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 and p != 1 %}
+        <!--To always show first page -->
+
+        <!--To show page in range +-2 of curent page -->
+
+        <a href="?page={{p}}">
+            <li class="page-num">
+                {{ p }}
+            </li>
+        </a>
+
+
+        {%endif%}
+        {%endfor%}
+
+        {%if page_obj.has_next%}
+        <a href="?page={{page_obj.next_page_number}}">
+            <li class="page-num ">
+                &gt;
+            </li>
+        </a>
+        {%endif%}
+    </ul>
+</nav>
+{%endif%}
 {% endblock %}

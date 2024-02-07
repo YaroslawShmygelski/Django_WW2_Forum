@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
@@ -35,19 +36,16 @@ class Persons_Main(DataMixin, ListView):
     title_page = Persons
 
     def get_queryset(self):
-        return Persons.published.all()
+        return Persons.published.all().order_by('pk')
 
 
 def about_index(request):
-    if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            fp = FileModel(file=form.cleaned_data['file'])
-            fp.save()
+    posts_query=Persons.published.all()
+    paginator=Paginator(posts_query,3)
 
-    else:
-        form = UploadFileForm()
-    return render(request, 'sitetest/about.html', {'form': form})
+    page_num=request.GET.get('page')
+    page_obj=paginator.get_page(page_num)
+    return render(request, 'sitetest/about.html', {'page_object': page_obj})
 
 
 # def addpost(request):
@@ -146,7 +144,7 @@ class ShowCategories(DataMixin, ListView):
     context_object_name = 'posts'
 
     def get_queryset(self):
-        return Persons.published.filter(cat__slug=self.kwargs['cat_slug'])
+        return Persons.published.filter(cat__slug=self.kwargs['cat_slug']).order_by('pk')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
