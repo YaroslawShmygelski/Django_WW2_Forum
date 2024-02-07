@@ -1,11 +1,8 @@
 from django.conf.urls.static import static
-from django.urls import path, register_converter
+from django.urls import path
 
 from firstsite import settings
 from . import views
-from . import converts
-
-register_converter(converts.FourDigitYearConverter, "year4")
 
 urlpatterns = [
     path('', views.Persons_Main.as_view(), name="home"),

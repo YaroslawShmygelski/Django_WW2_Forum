@@ -165,7 +165,6 @@ class ShowCategories(DataMixin, ListView):
 #     }
 #     return render(request, "sitetest/index.html", context=data)
 
-
 class ShowTags(DataMixin, ListView):
     template_name = 'sitetest/index.html'
     context_object_name = 'posts'
