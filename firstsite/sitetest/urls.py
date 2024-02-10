@@ -7,8 +7,8 @@ from . import views
 urlpatterns = [
     path('', views.Persons_Main.as_view(), name="home"),
     path('about/', views.about_index, name="about"),
-    path('contact/', views.contact, name="contact"),
-    path('login/', views.login, name="login"),
+    path('about/', views.about_index, name="contact"),
+    path('about/', views.about_index, name="login"),
     path('post/<slug:post_slug>/', views.ShowPost.as_view(), name="post"),
     path('category/<slug:cat_slug>/', views.ShowCategories.as_view(), name="category"),
     path('addpost', views.AddPost.as_view(), name='add_post'),
@@ -17,4 +17,4 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
