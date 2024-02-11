@@ -10,13 +10,6 @@ from sitetest.form import CreateForm, UploadFileForm
 from sitetest.models import Persons, Category, TagPost, FileModel
 from sitetest.utils import DataMixin
 
-menu = [{'title': "About", 'url_name': 'about'},
-        {'title': "Add Post", 'url_name': 'add_post'},
-        {'title': "Contact", 'url_name': 'contact'},
-        {'title': "Login", 'url_name': 'login'}
-
-        ]
-
 
 # def index(request):
 #     posts = Persons.published.all().select_related('cat')
