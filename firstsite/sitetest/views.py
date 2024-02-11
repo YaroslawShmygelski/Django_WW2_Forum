@@ -1,10 +1,12 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView, ListView, DetailView, FormView, UpdateView
+from django.views.generic import TemplateView, ListView, DetailView, FormView, UpdateView, CreateView
 
 from sitetest.form import CreateForm, UploadFileForm
 from sitetest.models import Persons, Category, TagPost, FileModel
@@ -26,12 +28,12 @@ from sitetest.utils import DataMixin
 class Persons_Main(DataMixin, ListView):
     template_name = "sitetest/index.html"
     context_object_name = 'posts'
-    title_page = Persons
+    title_page = 'WW2 Persons'
 
     def get_queryset(self):
         return Persons.published.all().order_by('pk')
 
-
+@login_required
 def about_index(request):
     posts_query=Persons.published.all()
     paginator=Paginator(posts_query,3)
@@ -58,14 +60,15 @@ def about_index(request):
 #     return render(request, "sitetest/addpost.html", context=data)
 
 
-class AddPost(DataMixin, FormView):
+class AddPost(LoginRequiredMixin,DataMixin, CreateView):
     form_class = CreateForm
     template_name = 'sitetest/addpost.html'
     success_url = reverse_lazy('home')
     title_page = 'Add Post'
 
     def form_valid(self, form):
-        form.save()
+        obj_form=form.save(commit=False)
+        obj_form.author=self.request.user
         return super().form_valid(form)
 
 

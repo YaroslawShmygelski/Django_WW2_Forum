@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
@@ -26,6 +27,8 @@ class Persons(models.Model):
     tags = models.ManyToManyField('TagPost', blank=True, related_name='tags', verbose_name="Tags")
     country = models.OneToOneField('Country', blank=True, on_delete=models.SET_NULL, null=True, related_name='countri',
                                    verbose_name="Country")
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='posts', null=True,
+                               default=True)
 
     objects = models.Manager()
     published = PublishedManager()

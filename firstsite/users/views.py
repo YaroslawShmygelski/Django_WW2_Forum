@@ -1,16 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
-from django.views.generic import FormView
 
 from users.forms import LoginForm
-
-
-def base(request):
-    return redirect()
-
 
 # Create your views here.
 # def login_users(request):
@@ -32,8 +24,9 @@ class LoginUsers(LoginView):
     form_class = LoginForm
     template_name = 'users/login.html'
 
-    def get_success_url(self):
-        return reverse_lazy('home')
+
+    # def get_success_url(self):
+    #     return reverse_lazy('home')
 
 #
 # def logout_users(request):
