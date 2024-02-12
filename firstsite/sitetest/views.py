@@ -63,7 +63,7 @@ def about_index(request):
 class AddPost(LoginRequiredMixin,DataMixin, CreateView):
     form_class = CreateForm
     template_name = 'sitetest/addpost.html'
-    success_url = reverse_lazy('home')
+    # success_url = reverse_lazy('home')
     title_page = 'Add Post'
 
     def form_valid(self, form):
@@ -105,7 +105,7 @@ def login(request):
 
 
 # View class of processing exact post data
-class ShowPost(DataMixin, DetailView):
+class ShowPost(LoginRequiredMixin,DataMixin, DetailView):
     template_name = "sitetest/post.html"
     context_object_name = 'post'
     slug_url_kwarg = 'post_slug'
