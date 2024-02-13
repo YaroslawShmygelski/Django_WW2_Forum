@@ -36,3 +36,17 @@ class RegistrationForm(UserCreationForm):
             if get_user_model().objects.filter(email=email_form).exists():
                 raise forms.ValidationError("Email already taken")
             return email_form
+
+
+class UserProfileForm(forms.ModelForm):
+    username = forms.CharField(label="Change Username", widget=forms.TextInput(attrs={'class': 'form-input'}))
+    email = forms.CharField(disabled=True, label="Change Username",
+                            widget=forms.TextInput(attrs={'class': 'form-input'}))
+
+    class Meta:
+        model = get_user_model()
+        fields = ['username', 'email', 'first_name', 'last_name']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-input'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-input'})
+        }
