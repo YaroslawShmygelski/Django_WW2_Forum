@@ -28,6 +28,7 @@ from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm, Us
 class UserLoginView(LoginView):
     form_class = UserLoginForm
     template_name = 'users/login.html'
+    extra_context = {'title': "Login"}
 
     # def get_success_url(self):
     #     return reverse_lazy('home')

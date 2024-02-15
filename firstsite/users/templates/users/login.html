@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>{{title}}</title>
 </head>
 <body>
 {%block content%}
@@ -18,8 +18,12 @@
     <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</p>
     <div class="form-error">{{ f.errors }}</div>
     {% endfor %}
+    <p><a href="{% url 'users:password_reset'%}">Forgot Password?</a></p>
     <button type="submit">Login</button>
-    <p> Don't have an account?: <a href="{% url 'users:registration'%}"> Create it</a></p>
+
+    <br>
+        <p> Don't have an account?: <a href="{% url 'users:registration'%}"> Create it</a></p>
+
 </form>
 {%endblock%}
 </body>
