@@ -31,12 +31,6 @@ class UserRegistrationForm(UserCreationForm):
             'last_name': forms.TextInput(attrs={'class': 'form-input'})
         }
 
-        def clean_email(self):
-            email_form = self.cleaned_data['email']
-            if get_user_model().objects.filter(email=email_form).exists():
-                raise forms.ValidationError("Email already taken")
-            return email_form
-
 
 class UserProfileForm(forms.ModelForm):
     username = forms.CharField(label="Change Username", widget=forms.TextInput(attrs={'class': 'form-input'}))
