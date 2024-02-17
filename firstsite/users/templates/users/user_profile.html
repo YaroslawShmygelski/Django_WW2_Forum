@@ -10,7 +10,9 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% if user.photo%}
-    <p><img src="{{user.photo.url}}">  </p>
+    <p><img src="{{user.photo.url}}"></p>
+    {%else%}
+    <p><img src="{{default_photo}}" width="170"></p>
     {%endif%}
     {% if messages %}
     <ul class="messages">

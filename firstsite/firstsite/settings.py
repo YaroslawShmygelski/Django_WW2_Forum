@@ -13,7 +13,6 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -148,7 +147,7 @@ EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'crazydonbaspig@gmail.com'
 load_dotenv()
-EMAIL_HOST_PASSWORD = os.getenv('SMTP_PASS')
-
+EMAIL_HOST_PASSWORD = os.getenv('SMPT_CODE')
 AUTH_USER_MODEL = "users.MyUser"
 
+DEFAULT_PROFILE_PHOTO = MEDIA_URL + 'photos/default/default_profile.jpg'

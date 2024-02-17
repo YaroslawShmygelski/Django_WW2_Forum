@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView
 
+from firstsite import settings
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm, UserPasswordChangeForm
 
 
@@ -63,7 +64,8 @@ class UserProfileView(LoginRequiredMixin, UpdateView):
     model = get_user_model()
     form_class = UserProfileForm
     template_name = 'users/user_profile.html'
-    extra_context = {'title': "Profile"}
+    extra_context = {'title': "Profile",
+                     'default_photo': settings.DEFAULT_PROFILE_PHOTO}
 
     def get_success_url(self):
         return reverse_lazy('users:profile')
@@ -82,5 +84,3 @@ class UserPasswordChangeView(PasswordChangeView):
         response = super().form_valid(form)
         messages.success(self.request, 'Password Successfully Changed')
         return response
-
-

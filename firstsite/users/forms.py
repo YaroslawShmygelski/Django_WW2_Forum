@@ -36,13 +36,14 @@ class UserProfileForm(forms.ModelForm):
     username = forms.CharField(label="Change Username", widget=forms.TextInput(attrs={'class': 'form-input'}))
     email = forms.CharField(disabled=True, label="Change Username",
                             widget=forms.TextInput(attrs={'class': 'form-input'}))
+
     class Meta:
         model = get_user_model()
         fields = ['photo', 'username', 'email', 'first_name', 'last_name']
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-input'}),
             'last_name': forms.TextInput(attrs={'class': 'form-input'}),
-            'photo':forms.FileInput()
+            'photo': forms.FileInput()
         }
 
 

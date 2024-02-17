@@ -1,6 +1,4 @@
 menu = [{'title': "About", 'url_name': 'about'},
-        {'title': "Add Post", 'url_name': 'add_post'},
-        {'title': "Contact", 'url_name': 'contact'},
         ]
 
 

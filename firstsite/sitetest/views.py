@@ -1,13 +1,11 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, FormView, UpdateView, CreateView
-
 from sitetest.form import CreateForm, UploadFileForm
 from sitetest.models import Persons, Category, TagPost, FileModel
 from sitetest.utils import DataMixin
@@ -60,11 +58,12 @@ def about_index(request):
 #     return render(request, "sitetest/addpost.html", context=data)
 
 
-class AddPost(LoginRequiredMixin,DataMixin, CreateView):
+class AddPost(PermissionRequiredMixin, LoginRequiredMixin,DataMixin, CreateView):
     form_class = CreateForm
     template_name = 'sitetest/addpost.html'
     # success_url = reverse_lazy('home')
     title_page = 'Add Post'
+    permission_required = 'sitetest.add_persons'
 
     def form_valid(self, form):
         obj_form=form.save(commit=False)
@@ -72,7 +71,7 @@ class AddPost(LoginRequiredMixin,DataMixin, CreateView):
         return super().form_valid(form)
 
 
-class ChangeForm(DataMixin, UpdateView):
+class ChangePost(DataMixin, UpdateView):
     model = Persons
     fields = ['title', 'content', 'photo', 'is_published', 'cat']
     template_name = 'sitetest/addpost.html'
