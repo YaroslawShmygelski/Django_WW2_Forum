@@ -36,17 +36,17 @@ class UserProfileForm(forms.ModelForm):
     username = forms.CharField(label="Change Username", widget=forms.TextInput(attrs={'class': 'form-input'}))
     email = forms.CharField(disabled=True, label="Change Username",
                             widget=forms.TextInput(attrs={'class': 'form-input'}))
-
     class Meta:
         model = get_user_model()
-        fields = ['username', 'email', 'first_name', 'last_name']
+        fields = ['photo', 'username', 'email', 'first_name', 'last_name']
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-input'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-input'})
+            'last_name': forms.TextInput(attrs={'class': 'form-input'}),
+            'photo':forms.FileInput()
         }
 
 
 class UserPasswordChangeForm(PasswordChangeForm):
-    old_password =  forms.CharField(label="Current Password", widget=forms.TextInput(attrs={'class': 'form-input'}))
+    old_password = forms.CharField(label="Current Password", widget=forms.TextInput(attrs={'class': 'form-input'}))
     new_password1 = forms.CharField(label="New Password", widget=forms.TextInput(attrs={'class': 'form-input'}))
-    new_password2 =  forms.CharField(label="Confirm new Password", widget=forms.TextInput(attrs={'class': 'form-input'}))
+    new_password2 = forms.CharField(label="Confirm new Password", widget=forms.TextInput(attrs={'class': 'form-input'}))

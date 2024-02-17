@@ -150,3 +150,5 @@ EMAIL_HOST_USER = 'crazydonbaspig@gmail.com'
 load_dotenv()
 EMAIL_HOST_PASSWORD = os.getenv('SMTP_PASS')
 
+AUTH_USER_MODEL = "users.MyUser"
+

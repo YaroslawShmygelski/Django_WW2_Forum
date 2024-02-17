@@ -7,8 +7,11 @@
 <body>
 {%block content%}
 <h1>{{user.username}} Profile</h1>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
+    {% if user.photo%}
+    <p><img src="{{user.photo.url}}">  </p>
+    {%endif%}
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
