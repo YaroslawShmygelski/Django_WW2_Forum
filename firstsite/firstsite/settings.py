@@ -133,14 +133,15 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Login Logout redirect settings
 LOGOUT_REDIRECT_URL = 'home'
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'home'
 
+# Email password reset settings
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
                            'users.authentication_custom.EmailAuthentication'
                            ]
-
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 465
@@ -150,4 +151,16 @@ load_dotenv()
 EMAIL_HOST_PASSWORD = os.getenv('SMPT_CODE')
 AUTH_USER_MODEL = "users.MyUser"
 
+# Path for default photo to use in profile
 DEFAULT_PROFILE_PHOTO = MEDIA_URL + 'photos/default/default_profile.jpg'
+
+# Redis Cache settings
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}

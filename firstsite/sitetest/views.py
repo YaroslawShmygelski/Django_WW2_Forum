@@ -7,8 +7,9 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, FormView, UpdateView, CreateView
 from sitetest.form import CreateForm, UploadFileForm
-from sitetest.models import Persons, Category, TagPost, FileModel
+from sitetest.models import Persons, Category, TagPost
 from sitetest.utils import DataMixin
+
 
 
 # def index(request):

@@ -92,5 +92,4 @@ class Country(models.Model):
     # Automatic Generation of slug based on na
 
 
-class FileModel(models.Model):
-    file = models.FileField(upload_to='uploads_model')
+
