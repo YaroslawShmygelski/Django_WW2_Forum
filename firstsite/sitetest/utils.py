@@ -1,12 +1,12 @@
 menu = [{'title': "About", 'url_name': 'about'},
-        ]
+        {'title': 'Create Post', 'url_name': 'add_post'}]
 
 
 class DataMixin:
     title_page = None
     cat_selected = None
     extra_context = {}
-    paginate_by=3
+    paginate_by = 3
 
     def __init__(self):
         if self.title_page:

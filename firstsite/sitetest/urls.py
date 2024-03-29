@@ -5,7 +5,7 @@ from firstsite import settings
 from . import views
 
 urlpatterns = [
-    path('', cache_page(60)(views.Persons_Main.as_view()), name="home"),
+    path('', views.Persons_Main.as_view(), name="home"),
     path('about/', views.about_index, name="about"),
     path('post/<slug:post_slug>/', views.ShowPost.as_view(), name="post"),
     path('category/<slug:cat_slug>/', views.ShowCategories.as_view(), name="category"),

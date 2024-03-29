@@ -9,6 +9,7 @@
 {%block content%}
 <form method="post">
     {% csrf_token %}
+    <a href="{% url 'social:begin' 'google-oauth2' %}">Register with Google</a>
     <input type="hidden" name="next" value="{{ next }}"/>
     <div class="form-error">{{ form.non_field_errors }}</div>
     {% for f in form %}

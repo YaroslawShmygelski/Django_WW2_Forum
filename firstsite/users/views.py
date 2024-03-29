@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, PasswordChangeView
+from django.forms import forms
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView
@@ -45,7 +46,6 @@ class UserRegisterView(CreateView):
     template_name = 'users/register.html'
     extra_context = {'title': "Registration"}
     success_url = reverse_lazy('users:login')
-
 
 # def register_user(request):
 #     if request.method == 'POST':

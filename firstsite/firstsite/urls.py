@@ -17,13 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("sitetest.urls")),
     path('users/', include('users.urls', namespace='users')),
-    path("__debug__/", include("debug_toolbar.urls")),
+    path('__debug__/', include("debug_toolbar.urls")),
+    path('social-auth', include('social_django.urls', namespace='social'))
 ]
+#887221217716-dad0kdt9ogds47i3spnr6kcmhfespc9u.apps.googleusercontent.com
+#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
 
 admin.site.site_header = "Admin Panel"
-

@@ -31,10 +31,16 @@ class UserRegistrationForm(UserCreationForm):
             'last_name': forms.TextInput(attrs={'class': 'form-input'})
         }
 
+    # Unique email check
+    def clean_email(self):
+        if get_user_model().objects.filter(email=self.cleaned_data['email']).exists():
+            raise forms.ValidationError("the given email is already registered")
+        return self.cleaned_data['email']
+
 
 class UserProfileForm(forms.ModelForm):
     username = forms.CharField(label="Change Username", widget=forms.TextInput(attrs={'class': 'form-input'}))
-    email = forms.CharField(disabled=True, label="Change Username",
+    email = forms.CharField(disabled=True, label="Change email",
                             widget=forms.TextInput(attrs={'class': 'form-input'}))
 
     class Meta:

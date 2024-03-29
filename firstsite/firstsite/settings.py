@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'django_extensions',
     "debug_toolbar",
+    'social_django',
+
     'sitetest',
     'users',
 
@@ -140,7 +143,9 @@ LOGIN_REDIRECT_URL = 'home'
 
 # Email password reset settings
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
-                           'users.authentication_custom.EmailAuthentication'
+                           'users.authentication_custom.EmailAuthentication',
+                           'social_core.backends.google.GoogleOAuth2'
+
                            ]
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
@@ -164,3 +169,7 @@ CACHES = {
         }
     }
 }
+
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '887221217716-620figcdtvkgi6lf6kk3ljs8ig2m07b1.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
