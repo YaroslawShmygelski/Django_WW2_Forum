@@ -4,12 +4,10 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, FormView, UpdateView, CreateView
 from sitetest.form import CreateForm, UploadFileForm
 from sitetest.models import Persons, Category, TagPost
 from sitetest.utils import DataMixin
-
 
 
 # def index(request):
@@ -59,12 +57,11 @@ def about_index(request):
 #     return render(request, "sitetest/addpost.html", context=data)
 
 
-class AddPost(PermissionRequiredMixin, LoginRequiredMixin,DataMixin, CreateView):
+class AddPost(LoginRequiredMixin,DataMixin, CreateView):
     form_class = CreateForm
     template_name = 'sitetest/addpost.html'
     # success_url = reverse_lazy('home')
     title_page = 'Add Post'
-    permission_required = 'sitetest.add_persons'
 
     def form_valid(self, form):
         obj_form=form.save(commit=False)
@@ -78,14 +75,6 @@ class ChangePost(DataMixin, UpdateView):
     template_name = 'sitetest/addpost.html'
     success_url = reverse_lazy('home')
     title_page = 'Changing Form'
-
-
-def contact(request):
-    return HttpResponse("Обратная связь")
-
-
-def login(request):
-    return HttpResponse("Авторизация")
 
 
 # def show_post(request, post_slug):

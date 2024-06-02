@@ -18,9 +18,12 @@ _____________________________________________________
 For Mac/ Linux
 source evenv/bin/activate
 
+pip3 install -r requirements.txt
 _____________________________________________________
 For Windows
 evenv\Scripts\activate
+
+pip install -r requirements.txt
 
 To run the server and test Website:
 

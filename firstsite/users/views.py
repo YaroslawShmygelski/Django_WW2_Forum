@@ -2,9 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, PasswordChangeView
-from django.forms import forms
-from django.shortcuts import render
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
 from firstsite import settings
@@ -32,14 +30,7 @@ class UserLoginView(LoginView):
     template_name = 'users/login.html'
     extra_context = {'title': "Login"}
 
-    # def get_success_url(self):
-    #     return reverse_lazy('home')
 
-
-#
-# def logout_users(request):
-#     logout(request)
-#     return HttpResponseRedirect(reverse('users:login'))
 
 class UserRegisterView(CreateView):
     form_class = UserRegistrationForm

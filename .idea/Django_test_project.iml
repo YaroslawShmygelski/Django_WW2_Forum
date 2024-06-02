@@ -5,7 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/firstsite" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/project/venv" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.11 (Django_test_project)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">

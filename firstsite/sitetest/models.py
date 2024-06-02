@@ -57,7 +57,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name = "Category"
-        verbose_name_plural = "Catefories"
+        verbose_name_plural = "Categories"
 
     def __str__(self):
         return self.name
@@ -89,7 +89,7 @@ class Country(models.Model):
     def __str__(self):
         return self.name
 
-    # Automatic Generation of slug based on na
+
 
 
 
