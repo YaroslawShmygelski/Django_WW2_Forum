@@ -445,3 +445,26 @@ ul.lang-list li a:hover {color: #fdc073;}
 .list-pages .page-num-selected:hover {
 	box-shadow: none;
 }
+.About-div h1{
+	text-align: center;
+}
+.authors-div{
+	padding: 20px 20px;
+
+}
+.authors-div ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-weight: 500;
+}
+.authors-div ul li{
+	margin: 10px 0;
+}
+.authors-div ul li:hover{
+	color: #FDA83D;
+}
+.about-text{
+	padding: 20px;
+	width: 50%;
+}

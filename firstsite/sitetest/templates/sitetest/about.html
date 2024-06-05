@@ -2,18 +2,26 @@
 
 {% block content %}
 <h1>{{title}}</h1>
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {%for item in page_object%}
-    {{item}}
-    {%endfor%}
+<div class="About-div">
+    <h1>Information about  our website</h1>
+<div class="about-text">
+    We created this website to give users opportunity to
+    create an Articles about their Family.
+    Famous people and Films of WW2. To save the truth and
+    to pass on information about this time to next generations
 
+</div>
+
+<div class="authors-div">
+    <h2> Authors:</h2>
     <ul>
-        {%for p in page_object.paginator.page_range%}
-        <li>
-           <a href="?page={{p}}"> {{p}}</a>
-        </li>
-        {%endfor%}
+        <li>Yaroslav Shmyhelskyi</li>
+        <li>Viktor Boichenko</li>
+        <li>Jakub Dziedzic</li>
+        <li>Andrei Tutski</li>
+        <li>Pavel Veretenikov</li>
     </ul>
-</form>
+</div>
+</div>
+
 {% endblock %}
